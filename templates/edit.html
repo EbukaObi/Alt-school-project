@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="header"><h1>Edit Article</h1></div><br><hr><br>
+<form action="{{url_for('edit', id=edit_blog.id)}}" method="POST">
+    <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" name="title" id="title" value="{{ edit_blog.title }}" type="text">
+    </div><hr>
+    <div class="mb-3">
+        <label class="form-label" for="content"></label>
+        <textarea class="form-control" name="content" id="content" rows="10">{{ edit_blog.post }}</textarea>
+    </div>
+    <input type="submit" value="Edit Post" class="button btn-success rounded p-2"/>
+</form>
+
+{% endblock %}

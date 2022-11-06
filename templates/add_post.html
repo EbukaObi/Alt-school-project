@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="header" align="center"><h3>Post Article</h3></div><br><br>
+<form action="/add_post" method="POST">
+    <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" name="title" id="title" placeholder="Blog title" type="text">
+    </div><hr>
+    <div class="mb-3">
+        <label class="form-label" for="content">Write Content</label>
+        <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+    </div>
+    <input type="submit" value="Add Post" class="button btn-success rounded p-2"/>
+</form>
+
+{% endblock %}

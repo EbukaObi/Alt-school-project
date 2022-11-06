@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="header"><h2>{{ blog.title }}!</h2></div>
+<div class="post-details">
+    <div class="mb-1 text-muted">{{blog.date_created.strftime('%B %d, %Y')}} <span> | </span> {{blog.date_created.strftime('%I:%M %p')}} by <strong>{{blog.author}}</strong></div>
+    <hr>
+    <br>
+    {% if current_user.username == blog.author %}
+    <button type="button" class="btn btn-success "><a class="text-decoration-none text-white" href="/add_post/{{blog.id}}/edit">Edit</a></button>
+    <button type="button" class="btn btn-danger"><a class="text-decoration-none text-white" href="/delete/{{blog.id}}">Delete</a></button>
+    {% endif %}
+    <br><br>
+    <div class="border border-secondary rounded p-4"><p>{{blog.post}}</p></div>
+</div><br><br><br><br><br><br>
+
+{% endblock %}

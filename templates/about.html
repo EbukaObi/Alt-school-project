@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="header" align="center"><h3>About Page</h3></div><hr><br>
+<div class="d-flex justify-content-around">
+    <div>
+        <img class="rounded-circle shadow-4-strong" width="300" alt="Ebuka Obi avatar" src="{{url_for('static', filename='ebuka.jpg')}}"/>
+    </div>
+
+    <div class="border border-secondary w-50 rounded p-3">
+        <p>Hi, i'm <strong>Ebuka Obi</strong>, a software engineer and a student of Alt_School Africa from Anambra state, Nigeria. I graduated from the prestigious University of Nigeria,
+            where i studied electronics engineering. My strong curiousity for understanding how computers and softwares work has made me pursue a carrer in software engineering.</p>
+        <p>At Alt_School Africa, I and a lot of other students have been drilled properly to understand the rigors of backend engineering. I use python language most often the flask framework while building backend solutions.</p>
+        <p>Thanks for checking out my blog</p>
+    </div>
+</div>
+{% endblock %}
