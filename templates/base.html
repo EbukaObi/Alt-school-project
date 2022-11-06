@@ -32,13 +32,16 @@
             {% if current_user.is_authenticated %}
             <nav class="nav d-flex text-secondary justify-content-between h5">
                 <a href="{{url_for('home')}}" class="p-2 link-secondary text-dark">Home</a>
+                <a href="{{url_for('add_post')}}" class="p-2 link-secondary text-dark">Create</a>
                 <a class="p-2 link-secondary text-dark" href="{{url_for('about')}}">About</a>
                 <a class="p-2 link-secondary text-dark" href="{{url_for('contact')}}">Contact</a>
-                <a href="{{url_for('add_post')}}" class="p-2 link-secondary text-dark">Create</a>
                 <a class="p-2 link-secondary text-dark" href="{{url_for('logout')}}">Logout</a>
             </nav>
             {% else %}
             <nav class="nav d-flex justify-content-right h5">
+                <a href="{{url_for('home')}}" class="p-2 link-secondary text-dark">Home</a>
+                <a class="p-2 link-secondary text-dark" href="{{url_for('about')}}">About</a>
+                <a class="p-2 link-secondary text-dark" href="{{url_for('contact')}}">Contact</a>
                 <a class="p-2 link-secondary text-dark" href="{{url_for('login')}}">Log In</a>
                 <a class="p-2 link-secondary text-dark" href="{{url_for('register')}}">Sign up</a>
             </nav>

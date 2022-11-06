@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, LoginManager, UserMixin, current_user
@@ -131,18 +131,21 @@ def post_details(id):
 @login_required
 def edit(id):
     edit_blog = Blog.query.get_or_404(id)
+    if current_user.username != edit_blog.author:
+        flash("You cannot edit this blog", category="error")
+        return redirect(url_for("post_details", id=edit_blog.id))
+    else:
+        if request.method == 'POST':
+                edit_blog.title = request.form.get('title')
+                edit_blog.post = request.form.get('content')
+                edit_blog.date_created = datetime.now()
+                with app.app_context():
+                    db.session.commit()
+                flash("Your post has been updated successfully!", "success")
 
-    if request.method == 'POST':
-            edit_blog.title = request.form.get('title')
-            edit_blog.post = request.form.get('content')
-            edit_blog.date_created = datetime.now()
-            with app.app_context():
-                db.session.commit()
-            flash("Your post has been updated successfully!", "success")
+                return redirect(url_for('home'))
 
-            return redirect(url_for('home'))
-
-    return render_template('edit.html', edit_blog=edit_blog)
+        return render_template('edit.html', edit_blog=edit_blog)
 
 
 
@@ -150,6 +153,9 @@ def edit(id):
 @login_required
 def delete(id):
     delete_blog = Blog.query.get_or_404(id)
+    if current_user.username != delete_blog.author:
+        flash("You cannot delete this blog", category="error")
+        return redirect(url_for("post_details", id=delete_blog.id))
     with app.app_context():
         db.session.delete(delete_blog)
         db.session.commit()
