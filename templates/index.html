@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Home page{% endblock %}
 {% block content %}
 
 {% if current_user.is_authenticated %}
@@ -26,7 +27,7 @@
 {% else %}
 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex bg-dark flex-column position-static">
-        <h1 class="display-4 text-white fst-italic p-3"><strong>Welcome to Suki blog</strong></h1>
+        <h1 class="display-4 text-white fst-italic p-3"><strong>Welcome to Blog 23</strong></h1>
         <p class="lead pl-4 text-white my-3">Here are some of the latest blog posts. You too can post your stories, all you need do is sign up.</p>
     </div>
 </div>

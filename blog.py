@@ -28,7 +28,7 @@ db.init_app(app)
 login_manager = LoginManager(app)
 
 
-class Blog(db.Model):
+class Blog(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     post = db.Column(db.Text, nullable=False)
@@ -98,12 +98,6 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route('/protected')
-@login_required
-def protected():
-    return render_template ('protected.html')
-
-
 @app.route('/add_post', methods=['POST', 'GET'])
 @login_required
 def add_post():
@@ -120,6 +114,14 @@ def add_post():
         return redirect('/')
 
     return render_template('add_post.html')
+
+
+@app.route('/my_blogs', methods=['GET'])
+@login_required
+def my_blogs():
+    blog = Blog.query.order_by(Blog.date_created.desc()).filter_by(author=current_user.username).all()
+    return render_template('my_blogs.html', blog=blog)
+
 
 @app.route('/add_post/<int:id>', methods=['GET', 'POST'])
 def post_details(id):
@@ -159,7 +161,7 @@ def delete(id):
     with app.app_context():
         db.session.delete(delete_blog)
         db.session.commit()
-    flash("Your post has been deleted successfully!", "error")
+    flash("Your post has been deleted successfully!", "success")
     return redirect(url_for('home'))
 
 

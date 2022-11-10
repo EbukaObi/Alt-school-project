@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}My blogs page{% endblock %}
+{% block content %}
+
+<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div class="col p-4 d-flex bg-dark flex-column position-static">
+        <h1 class="display-4 text-white fst-italic p-3"><strong>Welcome {{ current_user.first_name }}!</strong></h1>
+        <p class="lead pl-4 text-white my-3">Here are some of the latest blog posts.</p>
+    </div>
+</div>
+{% for post in blog %}
+<div class="row mb-2">
+    <div class="col-md-10">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <a class="text-secondary" href="{{url_for('post_details', id=post.id)}}"><h2>{{ post.title }}</h2></a>
+                <div class="mb-1 text-muted">{{post.date_created.strftime('%B %d, %Y')}} <span> | </span> {{post.date_created.strftime('%I:%M %p')}} by <strong>{{post.author}}</strong></div>
+                <hr width="100%">
+                <p class="card-text mb-auto">{{post.post | truncate(400)}}</p>
+                <p><a href="{{url_for('post_details', id=post.id)}}" class="stretched-link">Read more</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}
+
